@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float gravityScale = 5f;
     public float bounceForce = 8f;
-    //gil
+    //
     private Vector3 moveDirection;
 
     public CharacterController charController;
