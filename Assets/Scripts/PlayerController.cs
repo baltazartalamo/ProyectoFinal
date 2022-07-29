@@ -125,9 +125,9 @@ public class PlayerController : MonoBehaviour
         charController.Move(moveDirection * Time.deltaTime);
     }
 
-    public void Bounce()
+    public void Bounce() //Lo llamamos cada vez que querramos rebotar por ejemplo en la cabeza de un enemigo y asi hacerle daño
     {
-        moveDirection.y = bounceForce;
-        charController.Move(moveDirection * Time.deltaTime);
+        moveDirection.y = bounceForce; //aplicamos fuerza en el eje y
+        charController.Move(moveDirection * Time.deltaTime); //movimiento del personaje
     }
 }
