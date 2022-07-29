@@ -6,30 +6,30 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
 
-    public float moveSpeed;
-    public float jumpForce;
-    public float gravityScale = 5f;
-    public float bounceForce = 8f;
+    public float moveSpeed;//Velocidad de movimiento, se utiliza float porque vamos a usar un numero y puede ser un decimal
+    public float jumpForce; //Salto
+    public float gravityScale = 5f; //Modifica la gravedad del personaje, hace que caiga mas lento
+    public float bounceForce = 8f; //Modifica la velovidad del bounce
     //
-    private Vector3 moveDirection;
+    private Vector3 moveDirection; //Un vector3 significa que queremos 3 ejes (x y z), porque el juego es 3d
 
-    public CharacterController charController;
+    public CharacterController charController;//mover el personaje
 
-    private Camera theCam;
+    private Camera theCam;//vistas de la camara
 
     public GameObject playerModel;
     public float rotateSpeed;
 
     public Animator anim;
 
-    public bool isKnocking;
+    public bool isKnocking;//golpes
     public float knockBackLength = .5f;
     private float knockbackCounter;
     public Vector2 knockbackPower;
 
     public GameObject[] playerPieces;
 
-    public bool stopMove;
+    public bool stopMove;//detenerse
 
     private void Awake()
     {
@@ -47,8 +47,8 @@ public class PlayerController : MonoBehaviour
     {
         if(!isKnocking && !stopMove)
         {
+            //Movimiento
             float yStore = moveDirection.y;
-            //moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
             moveDirection = (transform.forward * Input.GetAxisRaw("Vertical")) + (transform.right * Input.GetAxisRaw("Horizontal"));
             moveDirection.Normalize();
             moveDirection = moveDirection * moveSpeed;
@@ -116,11 +116,10 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("Grounded", charController.isGrounded);
     }
 
-    public void Knockback()
+    public void Knockback() //Retroceso del personaje al chocar con el enemigo
     {
         isKnocking = true;
-        knockbackCounter = knockBackLength;
-        //Debug.Log("Knocked Back");
+        knockbackCounter = knockBackLength;  
         moveDirection.y = knockbackPower.y;
         charController.Move(moveDirection * Time.deltaTime);
     }
